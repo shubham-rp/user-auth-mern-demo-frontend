@@ -24,7 +24,7 @@ const useStyles = makeStyles()((theme) => {
     },
     signUpButton: {
       marginTop: "8px",
-      width: "128px",
+      width: "196px",
       backgroundColor: "teal",
       textDecoration: "none",
       color: "white",
@@ -59,7 +59,7 @@ function Login() {
         <Box className={classes.signUpLink}>
           <Link to="/signup">
             <Button variant="contained" className={classes.signUpButton}>
-              Sign Up
+              Go To Sign Up
             </Button>
           </Link>
         </Box>
