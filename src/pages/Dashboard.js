@@ -21,6 +21,9 @@ const useStyles = makeStyles()(() => {
       backgroundAttachment: "fixed",
       backgroundSize: "cover",
     },
+    appBar: {
+      backgroundColor: "teal",
+    },
   };
 });
 
@@ -29,7 +32,7 @@ function Dashboard() {
   return (
     <>
       <Box className={classes.box}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Toolbar>
             <IconButton
               size="large"

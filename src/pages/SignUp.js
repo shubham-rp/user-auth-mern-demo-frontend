@@ -41,11 +41,13 @@ const useStyles = makeStyles()((theme) => {
     },
     signUpTextField: {
       width: "512px",
-      backgroundColor: "white",
     },
     signUpButton: {
       width: "128px",
       backgroundColor: "teal",
+    },
+    helperText: {
+      color: "tomato",
     },
   };
 });
@@ -75,12 +77,18 @@ function SignUp() {
               variant="outlined"
               label="Full Name"
               helperText="Some important text"
+              FormHelperTextProps={{
+                className: classes.helperText,
+              }}
             />
             <TextField
               className={classes.signUpTextField}
               variant="outlined"
               label="Email"
               helperText="Some important text"
+              FormHelperTextProps={{
+                className: classes.helperText,
+              }}
             />
             <TextField
               className={classes.signUpTextField}
@@ -88,6 +96,9 @@ function SignUp() {
               label="Password"
               type="password"
               helperText="Some important text"
+              FormHelperTextProps={{
+                className: classes.helperText,
+              }}
             />
             <TextField
               className={classes.signUpTextField}
@@ -95,6 +106,9 @@ function SignUp() {
               label="Confirm Password"
               type="password"
               helperText="Some important text"
+              FormHelperTextProps={{
+                className: classes.helperText,
+              }}
             />
             <Button variant="contained" className={classes.signUpButton}>
               Sign Up

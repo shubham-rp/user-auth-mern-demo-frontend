@@ -41,11 +41,13 @@ const useStyles = makeStyles()((theme) => {
     },
     loginTextField: {
       width: "512px",
-      backgroundColor: "white",
     },
     loginButton: {
       width: "128px",
       backgroundColor: "teal",
+    },
+    helperText: {
+      color: "tomato",
     },
   };
 });
@@ -75,6 +77,9 @@ function Login() {
               variant="outlined"
               label="Email"
               helperText="Some important text"
+              FormHelperTextProps={{
+                className: classes.helperText,
+              }}
             />
             <TextField
               className={classes.loginTextField}
@@ -82,6 +87,9 @@ function Login() {
               label="Password"
               type="password"
               helperText="Some important text"
+              FormHelperTextProps={{
+                className: classes.helperText,
+              }}
             />
             <Button variant="contained" className={classes.loginButton}>
               Sign In
