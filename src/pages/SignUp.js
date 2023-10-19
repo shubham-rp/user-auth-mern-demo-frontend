@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   Container,
   CssBaseline,
@@ -46,14 +47,27 @@ const useStyles = makeStyles()((theme) => {
       width: "128px",
       backgroundColor: "teal",
     },
-    helperText: {
-      color: "tomato",
-    },
   };
 });
 
 function SignUp() {
   const { classes } = useStyles();
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const { register, handleSubmit, getValues, formState, watch } = form;
+  const { errors } = formState;
+
+  const onSubmit = () => {
+    console.log(getValues());
+  };
+
   return (
     <>
       <CssBaseline />
@@ -66,54 +80,91 @@ function SignUp() {
           </Link>
         </Box>
         <Box className={classes.signUpBox}>
-          <Stack spacing={4} alignItems="center">
-            <Typography className={classes.signUpHeading}>
-              {" "}
-              USER AUTH DEMO SIGNUP{" "}
-            </Typography>
-            <Divider flexItem />
-            <TextField
-              className={classes.signUpTextField}
-              variant="outlined"
-              label="Full Name"
-              helperText="Some important text"
-              FormHelperTextProps={{
-                className: classes.helperText,
-              }}
-            />
-            <TextField
-              className={classes.signUpTextField}
-              variant="outlined"
-              label="Email"
-              helperText="Some important text"
-              FormHelperTextProps={{
-                className: classes.helperText,
-              }}
-            />
-            <TextField
-              className={classes.signUpTextField}
-              variant="outlined"
-              label="Password"
-              type="password"
-              helperText="Some important text"
-              FormHelperTextProps={{
-                className: classes.helperText,
-              }}
-            />
-            <TextField
-              className={classes.signUpTextField}
-              variant="outlined"
-              label="Confirm Password"
-              type="password"
-              helperText="Some important text"
-              FormHelperTextProps={{
-                className: classes.helperText,
-              }}
-            />
-            <Button variant="contained" className={classes.signUpButton}>
-              Sign Up
-            </Button>
-          </Stack>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Stack spacing={4} alignItems="center">
+              <Typography className={classes.signUpHeading}>
+                {" "}
+                USER AUTH DEMO SIGNUP{" "}
+              </Typography>
+              <Divider flexItem />
+              <TextField
+                className={classes.signUpTextField}
+                variant="outlined"
+                label="Full Name"
+                {...register("name", {
+                  required: "Name is required",
+                  pattern: {
+                    value: /^[a-z ,.'-]+$/i,
+                    message: "Please enter a valid name",
+                    // regex pattern for to work on international names
+                    // message: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+                  },
+                })}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+              />
+              <TextField
+                className={classes.signUpTextField}
+                variant="outlined"
+                label="Email"
+                type="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid Email Address",
+                  },
+                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+              <TextField
+                className={classes.signUpTextField}
+                variant="outlined"
+                label="Password"
+                type="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+
+                  // pattern: {
+                  //   value:
+                  //     /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/,
+                  //   message:
+                  //     "Password must be at least 8 characters long & contain one special character, one lowercase letter, one uppercase letter, one digit from 1 to 9 & no space",
+                  // },
+                })}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+              <TextField
+                className={classes.signUpTextField}
+                variant="outlined"
+                label="Confirm Password"
+                type="password"
+                {...register("confirmPassword", {
+                  required: true,
+                  validate: (val) => {
+                    if (watch("password") != val) {
+                      return "Your passwords do no match";
+                    }
+                  },
+                })}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                className={classes.signUpButton}
+              >
+                Sign Up
+              </Button>
+            </Stack>
+          </form>
         </Box>
       </Container>
     </>

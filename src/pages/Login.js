@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   Container,
   CssBaseline,
@@ -46,14 +47,25 @@ const useStyles = makeStyles()((theme) => {
       width: "128px",
       backgroundColor: "teal",
     },
-    helperText: {
-      color: "tomato",
-    },
   };
 });
 
 function Login() {
   const { classes } = useStyles();
+
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const { register, handleSubmit, getValues, formState } = form;
+  const { errors } = formState;
+
+  const onSubmit = () => {
+    console.log(getValues());
+  };
   return (
     <>
       <CssBaseline />
@@ -66,35 +78,52 @@ function Login() {
           </Link>
         </Box>
         <Box className={classes.loginBox}>
-          <Stack spacing={4} alignItems="center">
-            <Typography className={classes.loginHeading}>
-              {" "}
-              USER AUTH DEMO LOGIN{" "}
-            </Typography>
-            <Divider flexItem />
-            <TextField
-              className={classes.loginTextField}
-              variant="outlined"
-              label="Email"
-              helperText="Some important text"
-              FormHelperTextProps={{
-                className: classes.helperText,
-              }}
-            />
-            <TextField
-              className={classes.loginTextField}
-              variant="outlined"
-              label="Password"
-              type="password"
-              helperText="Some important text"
-              FormHelperTextProps={{
-                className: classes.helperText,
-              }}
-            />
-            <Button variant="contained" className={classes.loginButton}>
-              Sign In
-            </Button>
-          </Stack>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Stack spacing={4} alignItems="center">
+              <Typography className={classes.loginHeading}>
+                {" "}
+                USER AUTH DEMO LOGIN{" "}
+              </Typography>
+              <Divider flexItem />
+              <TextField
+                className={classes.loginTextField}
+                variant="outlined"
+                label="Email"
+                type="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid Email Address",
+                  },
+                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+              <TextField
+                className={classes.loginTextField}
+                variant="outlined"
+                label="Password"
+                type="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must have at least 8 characters",
+                  },
+                })}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                className={classes.loginButton}
+              >
+                Login
+              </Button>
+            </Stack>
+          </form>
         </Box>
       </Container>
     </>
