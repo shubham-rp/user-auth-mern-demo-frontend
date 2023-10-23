@@ -49,6 +49,7 @@ function Dashboard() {
             <Button color="inherit">LOGOUT</Button>
           </Toolbar>
         </AppBar>
+        <Typography variant="h3">Hello !</Typography>
       </Box>
     </>
   );
