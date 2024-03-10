@@ -1,15 +1,16 @@
-## MERN User Authentication Demo
 
-This repository is the frontend for User Authentication Wrapper built using MERN Stack.
+# Frontend for User Authentication MERN Application
 
-### Link to backend 
+### Summary
 
-## To run the application
+The application is a demo for user authentication. Built on MERN Stack with the following technologies in the Frontend:
 
-### Tools / packages used
-  - React Hook Form
-  - Material UI
-  - Axios
+1. Axios
+2. Material UI & Material UI Icons
+3. React Hook Form
 
-### Demo Link
+## How to run the application locally
 
+Create a .env file in the src directory and add REACT_APP_BACKEND_API_URL= <url of backend>
+
+Run the application with the following command: npm start
