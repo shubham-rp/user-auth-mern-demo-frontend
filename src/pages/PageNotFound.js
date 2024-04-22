@@ -43,11 +43,11 @@ function PageNotFound() {
           Oops ! Page Not Found !!
         </Typography>
         <Typography variant="h5" className={classes.text}>
-          We are sorry, but the page you requested could not be found
+          We are sorry, but the page you requested could not be found.
         </Typography>
         <Link to="/">
           <Button variant="contained" className={classes.button}>
-            Go to Home
+            Go To Home
           </Button>
         </Link>
       </Stack>
