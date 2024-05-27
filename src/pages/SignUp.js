@@ -84,7 +84,7 @@ function SignUp() {
             <Stack spacing={4} alignItems="center">
               <Typography className={classes.signUpHeading}>
                 {" "}
-                USER AUTH DEMO SIGNUP{" "}
+                USER AUTHENTICATION DEMO SIGNUP{" "}
               </Typography>
               <Divider flexItem />
               <TextField
