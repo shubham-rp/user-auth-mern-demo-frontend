@@ -40,7 +40,7 @@ function PageNotFound() {
           <span className={classes.spannedText}>4</span>
         </Typography>
         <Typography variant="h4" className={classes.text}>
-          Oops ! Page Not Found !!
+          Oops! Page Not Found !!
         </Typography>
         <Typography variant="h5" className={classes.text}>
           We are sorry, but the page you requested could not be found.
